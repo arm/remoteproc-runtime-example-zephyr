@@ -1,3 +1,5 @@
 # mandalay-ambient-zephyr
 
-make image
+```bash
+make
+```
