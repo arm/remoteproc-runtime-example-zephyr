@@ -33,7 +33,9 @@ All build and deploy commands are driven through the provided Makefile.
 
 ## Flashing
 
-TODO
+```sh
+./copy_build_to_flash_tools.sh
+```
 
 ## Customization
 - To change the target board, edit the `BUILD_CMD` in the Makefile or override with:
