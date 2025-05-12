@@ -5,10 +5,9 @@
  */
 
 #include <stdio.h>
-#include <zephyr/kernel.h>   /* or <zephyr/printk.h> */
+#include <zephyr/kernel.h> /* or <zephyr/printk.h> */
 
-int main(void)
-{
-	printk("Look Ma! I'm programming the %s\n", CONFIG_BOARD);
-	return 0;
+int main(void) {
+  printk("Hello from the %s\n", CONFIG_BOARD);
+  return 0;
 }

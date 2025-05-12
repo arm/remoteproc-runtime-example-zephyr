@@ -4,12 +4,15 @@ A minimal Zephyr RTOS project for the Alif E7 development kit which flashes a mi
 
 ## Features
   - Uses Zephyr RTOS
-  - Builds for the `alif_e7_dk_rtss_he` board by default
+  - Builds for the `alif_e7_dk_rtss_hp` board by default
   - Dockerized toolchain and deployment images for reproducible builds
 
 ## Dependencies
-- CMake >= 3.20
-- Docker
+The build is container-based; the host machine only needs the tools that
+bootstrap the containerised build:
+
+- Docker – to run the build and deploy containers
+- GNU make – to invoke the Makefile targets
 
 ## Usage
 All build and deploy commands are driven through the provided Makefile.
@@ -31,10 +34,17 @@ All build and deploy commands are driven through the provided Makefile.
    ```
    The resulting Docker image `ambient-zephyr:latest` can be used to flash the board or further testing.
 
-## Flashing
+## Flashing to an Alif
+
+To flash the Alif E7 you will need to register and download the Alif Security Toolkit from their website:
+
+<https://alifsemi.com/support/software-tools/ensemble/>
+
+Once you've downloaded and extracted the tools, use this script to copy the binary to the appropriate flashing location:
+
 
 ```sh
-./copy_build_to_flash_tools.sh
+./scripts/copy_build_to_alif_tools.sh <PATH_TO_ALIF_TOOLS>
 ```
 
 ## Customization
