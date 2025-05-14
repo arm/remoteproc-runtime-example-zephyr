@@ -1,0 +1,18 @@
+{
+  "DEVICE": {
+    "disabled": false,
+    "binary": "app-device-config.json",
+    "version": "0.5.00",
+    "signed": true
+  },
+  "MNDLY-HP": {
+    "binary": "mandalay.bin",
+    "version": "1.0.0",
+    "signed": true,
+    "mramAddress": "0x80200000",
+    "cpu_id": "M55_HP",
+    "flags": [
+      "boot"
+    ]
+  }
+}
