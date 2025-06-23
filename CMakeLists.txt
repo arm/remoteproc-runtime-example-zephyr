@@ -6,3 +6,6 @@ find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(hello_world)
 
 target_sources(app PRIVATE src/main.c)
+
+# Include linker script to retain OpenAMP resource table
+zephyr_linker_sources(SECTIONS linker/keep_resource_table.ld)
