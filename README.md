@@ -16,6 +16,8 @@ bootstrap the containerised build:
 ## Usage
 
 ```bash
+# Pre-fetch the base image - this will save a lot of time when building
+docker pull zephyrprojectrtos/zephyr-build:v0.28.0
 # Build container
 docker build -t mandalay-ambient-zephyr .
 # Copy to mandalay
