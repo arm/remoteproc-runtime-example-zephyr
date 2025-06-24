@@ -16,5 +16,8 @@ bootstrap the containerised build:
 ## Usage
 
 ```bash
+# Build container
 docker build -t mandalay-ambient-zephyr .
+# Copy to mandalay
+docker save mandalay-ambient-zephyr | ssh root@mandalay.local 'docker load'
 ```
