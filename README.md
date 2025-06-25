@@ -22,4 +22,6 @@ docker pull zephyrprojectrtos/zephyr-build:v0.28.0
 docker build -t mandalay-ambient-zephyr .
 # Copy to mandalay
 docker save mandalay-ambient-zephyr | ssh root@mandalay.local 'docker load'
+# Launch
+ssh root@mandalay.local 'docker run --runtime io.containerd.remoteproc.v1 --annotation remoteproc.mcu=imx-rproc mandalay-ambient-zephyr'
 ```
