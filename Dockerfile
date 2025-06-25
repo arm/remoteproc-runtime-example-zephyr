@@ -3,10 +3,7 @@ FROM zephyrprojectrtos/zephyr-build:v0.28.0 AS build
 RUN west init
 RUN west update
 
-COPY prj.conf /workdir/
-COPY CMakeLists.txt /workdir/
-COPY linker/ /workdir/linker
-COPY src/ /workdir/src
+ADD workdir/ /workdir/
 
 RUN west build -b imx93_evk/mimx9352/m33 && \
     cp build/zephyr/zephyr.elf /tmp/zephyr.elf
