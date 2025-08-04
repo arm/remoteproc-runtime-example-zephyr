@@ -1,4 +1,4 @@
-# mandalay-ambient-zephyr
+# topo-ambient-zephyr
 
 A minimal Zephyr RTOS project for the NXP iMX93 development kit which flashes a minimal "Hello World" application that prints the target board name at startup.
 
@@ -21,9 +21,9 @@ bootstrap the containerised build:
 docker pull zephyrprojectrtos/zephyr-build:v0.28.0
 
 # Build container
-docker build -t mandalay-ambient-zephyr .
-# Copy to mandalay
-docker save mandalay-ambient-zephyr | ssh root@mandalay.local 'docker load'
+docker build -t ambient-zephyr .
+# Copy to topo
+docker save ambient-zephyr | ssh root@topo.local 'docker load'
 # Launch
-ssh root@mandalay.local 'docker run -d --runtime io.containerd.remoteproc.v1 --annotation remoteproc.mcu=imx-rproc mandalay-ambient-zephyr'
+ssh root@topo.local 'docker run -d --runtime io.containerd.remoteproc.v1 --annotation remoteproc.mcu=imx-rproc ambient-zephyr'
 ```
