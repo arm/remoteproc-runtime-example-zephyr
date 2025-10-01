@@ -1,6 +1,6 @@
 FROM zephyrprojectrtos/zephyr-build:v0.28.0 AS build
 
-RUN west init
+RUN west init --mr v4.2.0
 RUN west update
 
 ADD workdir/ /workdir/
