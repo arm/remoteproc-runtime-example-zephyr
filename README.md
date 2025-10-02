@@ -21,7 +21,7 @@ bootstrap the containerised build:
 docker pull zephyrprojectrtos/zephyr-build:v0.28.0
 
 # Build container
- docker build --no-cache --build-arg BOARD=<your board name> -t ambient-zephyr .
+ docker build --build-arg BOARD=<your board name> -t ambient-zephyr .
 # Supported board names:
 #   stm32mp257f_dk/stm32mp257fxx/m33
 #   imx93_evk/mimx9352/m33
