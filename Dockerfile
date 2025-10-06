@@ -1,6 +1,9 @@
 FROM zephyrprojectrtos/zephyr-build:v0.28.0 AS build
 
-RUN west init --mr v4.2.0
+RUN west init
+RUN git -C /workdir/zephyr fetch --all \
+ && git -C /workdir/zephyr checkout 402adc4a3709c4be8f2f9f3cd10b1a2d838060a9
+
 RUN west update
 
 ADD workdir/ /workdir/
