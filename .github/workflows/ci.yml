@@ -16,7 +16,7 @@ jobs:
         dockerfile: Dockerfile
     name: "Dive CI"
   dive:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, ARM64, large-arm-runner]
     name: Analyze image efficiency
     steps:
       - name: Checkout
