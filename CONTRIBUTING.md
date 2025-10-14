@@ -2,9 +2,9 @@
 
 The Arm Remoteproc Runtime Zephyr Example is open for external contributors, and welcomes contributions.
 
-Remoteproc Runtime is licensed under the [MIT](https://spdx.org/licenses/MIT.html) license and all accepted contributions must have the same license.
+Remoteproc Runtime Zephyr Example is licensed under the [MIT](https://spdx.org/licenses/MIT.html) license and all accepted contributions must have the same license.
 
-## Contributing code to Remoteproc Runtime
+## Contributing code to Remoteproc Runtime Zephyr Example
 
 - Before this project accepts your contribution, you need to certify its origin and give us your permission. To manage this process, we use [Developer Certificate of Origin (DCO) V1.1](https://developercertificate.org/).
   To indicate that contributors agree to the terms of the DCO, it's necessary to "sign off" the contribution by adding a line with your name and email address to every git commit message:
