@@ -6,10 +6,11 @@ RUN git -C /workdir/zephyr fetch --all \
 
 RUN west update
 
-ADD workdir/ /workdir/
+COPY workdir/ /workdir/
 
 ENV SUPPORTED_BOARDS="imx93_evk/mimx9352/m33 stm32mp257f_dk/stm32mp257fxx/m33"
 ARG BOARD="imx93_evk/mimx9352/m33"
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN if printf '%s\n' $SUPPORTED_BOARDS | tr ' ' '\n' | grep -Fxq "$BOARD"; then \
       echo "Building for board: $BOARD"; \
       west build -b "$BOARD" && \
