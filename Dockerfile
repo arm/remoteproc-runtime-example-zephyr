@@ -19,7 +19,15 @@ RUN west init -l . && \
 COPY . .
 # 3. Build
 ARG BOARD
-RUN test -n "$BOARD" || (echo "BOARD not set" && false) && \
+# Map indicative BOARD names to supported board IDs in zephyr
+RUN case "$BOARD" in \
+  *imx93*|*MIMX9352*) BOARD_ID="imx93_evk/mimx9352/m33" ;; \
+  *stm32mp257f*|*STM32MP257F*) BOARD_ID="stm32mp257f_dk/stm32mp257fxx/m33" ;; \
+  *) BOARD_ID="$BOARD" ;; \
+    esac && \
+    echo "Resolved BOARD_ID: $BOARD_ID" && \
+    export BOARD="$BOARD_ID" && \
+    test -n "$BOARD" || (echo "BOARD not set" && false) && \
     west build -p -b "$BOARD"
 
 FROM scratch
