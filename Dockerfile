@@ -16,11 +16,19 @@ WORKDIR /workspace
 COPY west.yml .
 RUN west init -l . && \
     west update --narrow --fetch-opt=--depth=1
+COPY ipm_stm32_ipcc.patch /tmp/
+RUN ZEPHYR_BASE="$(west list -f '{abspath}' zephyr)" && \
+    patch -d "$ZEPHYR_BASE" -p1 < /tmp/ipm_stm32_ipcc.patch
 COPY . .
 # 3. Build
 ARG BOARD
+ARG DTC_OVERLAY_FILE=stm32mp257f_dk_stm32mp257fxx_m33.overlay
 RUN test -n "$BOARD" || (echo "BOARD not set" && false) && \
-    west build -p -b "$BOARD"
+    if [ -n "$DTC_OVERLAY_FILE" ]; then \
+        west build -p -b "$BOARD" -- -DDTC_OVERLAY_FILE="$DTC_OVERLAY_FILE"; \
+    else \
+        west build -p -b "$BOARD"; \
+    fi
 
 FROM scratch
 COPY --from=build /workspace/build/zephyr/zephyr.elf /zephyr.elf
