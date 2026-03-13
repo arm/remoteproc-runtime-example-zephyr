@@ -1,7 +1,8 @@
 name: Test Artifactory Upload
 
 on:
-  workflow_dispatch:
+  push:
+    branches: [test-artifactory]
 
 permissions:
   contents: read
