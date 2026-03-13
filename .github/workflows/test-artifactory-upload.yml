@@ -46,6 +46,7 @@ jobs:
       artifactory-uploadables: test_linux_amd64
       archive-format: tar.gz
       executables: "*/test-binary"
+    secrets: inherit
 
   summary:
     needs: upload
