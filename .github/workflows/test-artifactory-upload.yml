@@ -1,0 +1,57 @@
+name: Test Artifactory Upload
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set version
+        id: version
+        run: echo "version=0.0.1-test-$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
+
+      - name: Create test file
+        run: |
+          mkdir -p dist/test_linux_amd64
+          echo "test artifact contents" > dist/test_linux_amd64/test-binary
+          chmod +x dist/test_linux_amd64/test-binary
+
+      - name: Upload test artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-v${{ steps.version.outputs.version }}-linux
+          path: dist/test_linux_amd64
+          if-no-files-found: error
+
+  upload:
+    needs: build
+    uses: Arm-debug/signer/.github/workflows/archive-and-upload-to-artifactory.yml@test-public-repo-upload
+    with:
+      run-id: ${{ github.run_id }}
+      archive-name: test-v${{ needs.build.outputs.version }}-linux
+      release-version: ${{ needs.build.outputs.version }}
+      repo-name: remoteproc-runtime-example-zephyr
+      org-name: Arm
+      artifactory-path: linux
+      artifactory-uploadables: test_linux_amd64
+      archive-format: tar.gz
+      executables: "*/test-binary"
+
+  summary:
+    needs: upload
+    runs-on: ubuntu-latest
+    steps:
+      - name: Output artifact URLs
+        run: |
+          echo "## Artifactory URLs" >> $GITHUB_STEP_SUMMARY
+          echo "### Linux" >> $GITHUB_STEP_SUMMARY
+          echo "${{ needs.upload.outputs.artifact-urls }}" >> $GITHUB_STEP_SUMMARY
